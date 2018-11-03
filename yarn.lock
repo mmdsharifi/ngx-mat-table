@@ -103,6 +103,14 @@
   dependencies:
     tslib "^1.9.0"
 
+"@angular/cdk@~7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.0.2.tgz#35081cd27a8f5214568b6ad1acf8cb3b3c315f99"
+  dependencies:
+    tslib "^1.7.1"
+  optionalDependencies:
+    parse5 "^5.0.0"
+
 "@angular/cli@~6.1.5":
   version "6.1.5"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-6.1.5.tgz#312c062631285ff06fd07ecde8afe22cdef5a0e1"
@@ -160,6 +168,12 @@
 "@angular/language-service@^6.1.0":
   version "6.1.10"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-6.1.10.tgz#9f87b740befca8bf9a5fb499446425519389f52f"
+
+"@angular/material@^7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-7.0.2.tgz#f64a664730dc497dbdc3dcabaf145636af90d0ea"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/platform-browser-dynamic@^6.1.0":
   version "6.1.10"
@@ -2577,6 +2591,10 @@ graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.1.6:
   version "4.1.14"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.14.tgz#1b6e8362ef8c5ecb5da799901f39297e3054773a"
 
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+
 handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
@@ -4405,6 +4423,10 @@ parse5@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-4.0.0.tgz#6d78656e3da8d78b4ec0b906f7c08ef1dfe3f608"
 
+parse5@^5.0.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.0.tgz#c59341c9723f414c452975564c7c00a68d58acd2"
+
 parsejson@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/parsejson/-/parsejson-0.0.3.tgz#ab7e3759f209ece99437973f7d0f1f64ae0e64ab"
@@ -5800,7 +5822,7 @@ tsickle@^0.32.1:
     source-map "^0.6.0"
     source-map-support "^0.5.0"
 
-tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.7.1, tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.9.3.tgz#d7e4dd79245d85428c4d7e4822a79917954ca286"
 
