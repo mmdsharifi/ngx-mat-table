@@ -1,6 +1,8 @@
-import { Filter } from './filter';
+import { FormFilter } from './form-filter';
 
-export interface LookupFilter extends Filter {
+export interface LookupFilter extends FormFilter {
   endpoint: string;
   multiple: boolean;
 }
+
+

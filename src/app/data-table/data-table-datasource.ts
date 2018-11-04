@@ -1,36 +1,39 @@
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Observable, merge, of as observableOf } from 'rxjs';
+
 import { DataSource } from '@angular/cdk/collections';
-import { MatPaginator, MatSort } from '@angular/material';
 import { map } from 'rxjs/operators';
-import { Observable, of as observableOf, merge } from 'rxjs';
 
 // TODO: Replace this with your own data model type
 export interface DataTableItem {
   name: string;
+  isActive: boolean;
   id: number;
+  type: string;
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: DataTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+  { id: 1, name: 'Hydrogen', isActive: false, type: 'type1' },
+  { id: 2, name: 'Helium', isActive: false, type: 'type1' },
+  { id: 3, name: 'Lithium', isActive: true, type: 'type1' },
+  { id: 4, name: 'Beryllium', isActive: true, type: 'type1' },
+  { id: 5, name: 'Boron', isActive: true, type: 'type1' },
+  { id: 6, name: 'Carbon', isActive: true, type: 'type1' },
+  { id: 7, name: 'Nitrogen', isActive: true, type: 'type1' },
+  { id: 8, name: 'Oxygen', isActive: true, type: 'type1' },
+  { id: 9, name: 'Fluorine', isActive: true, type: 'type1' },
+  { id: 10, name: 'Neon', isActive: true, type: 'type1' },
+  { id: 11, name: 'Sodium', isActive: true, type: 'type1' },
+  { id: 12, name: 'Magnesium', isActive: true, type: 'type1' },
+  { id: 13, name: 'Aluminum', isActive: true, type: 'type1' },
+  { id: 14, name: 'Silicon', isActive: true, type: 'type1' },
+  { id: 15, name: 'Phosphorus', isActive: true, type: 'type1' },
+  { id: 16, name: 'Sulfur', isActive: true, type: 'type1' },
+  { id: 17, name: 'Chlorine', isActive: true, type: 'type1' },
+  { id: 18, name: 'Argon', isActive: true, type: 'type1' },
+  { id: 19, name: 'Potassium', isActive: true, type: 'type1' },
+  { id: 20, name: 'Calcium', isActive: true, type: 'type1' }
 ];
 
 /**
@@ -62,9 +65,11 @@ export class DataTableDataSource extends DataSource<DataTableItem> {
     // Set the paginator's length
     this.paginator.length = this.data.length;
 
-    return merge(...dataMutations).pipe(map(() => {
-      return this.getPagedData(this.getSortedData([...this.data]));
-    }));
+    return merge(...dataMutations).pipe(
+      map(() => {
+        return this.getPagedData(this.getSortedData([...this.data]));
+      })
+    );
   }
 
   /**
@@ -78,7 +83,7 @@ export class DataTableDataSource extends DataSource<DataTableItem> {
    * this would be replaced by requesting the appropriate data from the server.
    */
   private getPagedData(data: DataTableItem[]) {
-    const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+    const startIndex = (this.paginator.pageIndex) * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
   }
 
@@ -94,9 +99,12 @@ export class DataTableDataSource extends DataSource<DataTableItem> {
     return data.sort((a, b) => {
       const isAsc = this.sort.direction === 'asc';
       switch (this.sort.active) {
-        case 'name': return compare(a.name, b.name, isAsc);
-        case 'id': return compare(+a.id, +b.id, isAsc);
-        default: return 0;
+        case 'name':
+          return compare(a.name, b.name, isAsc);
+        case 'id':
+          return compare(+a.id, +b.id, isAsc);
+        default:
+          return 0;
       }
     });
   }
