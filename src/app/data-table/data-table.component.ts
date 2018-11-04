@@ -1,9 +1,16 @@
+import {
+  BooleanColumn,
+  Column,
+  ColumnType,
+  EnumColumnDescriptor,
+  NumberColumn,
+  StringColumn
+} from './models/column';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataTableDataSource, DataTableItem } from './data-table-datasource';
+import { Filter, PagedQueryModel } from './models/paged-query-model';
 import { MatPaginator, MatSort } from '@angular/material';
 
-import { Column } from './models/column';
-import { Filter } from './models/paged-query-model';
 import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
@@ -16,6 +23,7 @@ export class DataTableComponent implements OnInit {
   paginator: MatPaginator;
   @ViewChild(MatSort)
   sort: MatSort;
+
   dataSource: DataTableDataSource;
   selection = new SelectionModel<DataTableItem>(true, []);
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
@@ -27,24 +35,35 @@ export class DataTableComponent implements OnInit {
     {
       title: 'شناسه',
       field: 'id',
-      type: 'number',
       sortable: true,
       filterable: true,
+      type: 'number',
       width: 10
     },
     {
       title: 'نام',
       field: 'name',
-      type: 'string',
       sortable: true,
+      type: 'string',
       filterable: true,
       width: 300
     },
     {
       title: 'فعال می باشد',
       field: 'isActive',
-      type: 'boolean',
       sortable: true,
+      type: 'boolean',
+      filterable: true,
+      width: 100
+    },
+    {
+      title: 'نوع',
+      field: 'type',
+      sortable: true,
+      type: 'enum',
+      descriptor: <EnumColumnDescriptor>{
+        enum: 'TaskType'
+      },
       filterable: true,
       width: 100
     }
@@ -71,17 +90,23 @@ export class DataTableComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    const filter = <Filter>{
-      logic: 'or',
-      filters: this.columns.filter(column => column.type === 'string').map(
-        column =>
-          <Filter>{
-            field: column.field,
-            operator: 'contains',
-            value: filterValue
-          })
+    const query = <PagedQueryModel>{
+      page: this.paginator.pageIndex,
+      pageSize: this.paginator.pageSize,
+      sort: `${this.sort.active}_${this.sort.direction}`,
+      filter: <Filter>{
+        logic: 'or',
+        filters: this.columns.filter(column => column.type === 'string').map(
+          column =>
+            <Filter>{
+              field: column.field,
+              operator: 'contains',
+              value: filterValue
+            }
+        )
+      }
     };
 
-    console.log(filter);
+    console.log(query);
   }
 }
